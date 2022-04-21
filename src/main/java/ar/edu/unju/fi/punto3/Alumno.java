@@ -5,7 +5,7 @@ public class Alumno {
 	private String apellido;
 	private String nombre;
 	private int lu;
-	private double notas[] = new double[5];
+	private double notas[];
 	
 	
 	/**
