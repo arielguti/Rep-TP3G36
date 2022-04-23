@@ -1,5 +1,9 @@
 package ar.edu.unju.fi.punto3;
 
+/**
+ * Clase del objeto Alumno que contiene datos personales y sus notas
+ * @author Mamaní
+ */
 public class Alumno {
 	
 	private String apellido;
@@ -9,11 +13,11 @@ public class Alumno {
 	
 	
 	/**
-	 * Constructor con parámetros de todos los atributos
-	 * @param apellido
-	 * @param nombre
-	 * @param lu
-	 * @param notas arreglo de cinco valores reales
+	 * Constructor que inicializa a un objeto Alumno con todos sus atributos
+	 * @param apellido Apellido del alumno
+	 * @param nombre Nombre del alumno
+	 * @param lu Número entero de Libreta Universitaria del alumno
+	 * @param notas Arreglo donde están las notas del alumno
 	 */
 	public Alumno(String apellido, String nombre, int lu, double[] notas) {
 		super();
@@ -26,7 +30,7 @@ public class Alumno {
 	
 	/**
 	 * Función que calcula el promedio de las notas del alumno
-	 * @return devuelve el promedio
+	 * @return Devuelve el promedio de las notas
 	 */
 	public double calcularPromedio() {
 		double total = 0;
@@ -49,10 +53,14 @@ public class Alumno {
 	}
 	
 	
+	/**
+	 * Función que devuelve una cadena con todos los datos del alumno
+	 */
 	@Override
 	public String toString() {
-		return apellido + ", " + nombre + " - LU: " + lu + " - Promedio: "
-				+ calcularPromedio() + " - Nota Máxima: " + obtenerNotaMaxima();
+		return "LU " + lu + "\t- " + apellido.toUpperCase() + ", " + nombre + "\t- Promedio: "
+				+ calcularPromedio() + " - Nota Máxima: " + obtenerNotaMaxima() + " - [" + notas[0] + 
+				", " + notas[1] + ", " + notas[2] + ", " + notas[3] + ", " + notas[4] + "]";
 	}
 
 
