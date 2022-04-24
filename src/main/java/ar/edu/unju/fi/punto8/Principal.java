@@ -111,13 +111,13 @@ public class Principal {
 	 * @return Devuelve un objeto tipo Alumno
 	 */
 	public static Alumno registrar() {
-		Scanner introTexto = new Scanner(System.in).useDelimiter("\n");
+		Scanner introTexto = new Scanner(System.in);
 		double lasNotas[]= new double[5];
 		System.out.println("REGISTRO DE ALUMNOS");
 		System.out.print("Apellido(s): ");
-		String apellidos = introTexto.next();		
+		String apellidos = introTexto.nextLine();		
 		System.out.print("Nombre(s): ");
-		String nombres = introTexto.next();
+		String nombres = introTexto.nextLine();
 		System.out.print("Nro. LU: ");
 		int nroLu = introNumber.nextInt();
 		if(!encontrarLU(nroLu)) {
