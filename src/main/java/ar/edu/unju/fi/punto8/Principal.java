@@ -1,6 +1,7 @@
 package ar.edu.unju.fi.punto8;
 
 import java.util.ArrayList;
+import java.util.InputMismatchException;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Scanner;
@@ -23,23 +24,30 @@ public class Principal {
 	 */
 	static List<Alumno> alumnos = new ArrayList<Alumno>();
 	
-	static Scanner ingreso = new Scanner(System.in);//ingreso desde consola
+	static Scanner introNumber = new Scanner(System.in);//ingreso de nro. desde consola
 	
 	/**
 	 * Método del principal donde se inicializa el programa
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		int opcion;
+		int opcion = 0;
+		boolean distinto = false;
 		do {
-			verMenu();			
-			do {									
-				opcion = ingreso.nextInt();
-				if(opcion<1 || opcion>6)
-					System.out.print("Error. Ingrese entre 1 y 6: ");				
-			}while(opcion<1 || opcion>6);
-			elegirOpcion(opcion);			
-		}while(opcion!=6);
+        	verMenu();
+            try {            	
+                opcion = introNumber.nextInt();
+                ejecutarOpcion(opcion);
+                if(opcion<1 || opcion>6) System.out.println("Ingrese entre 1 y 6.");
+            } catch (InputMismatchException e) {
+                System.out.println("Debes teclear un número entero.");
+                introNumber = new Scanner(System.in);
+                distinto = true;
+            }
+            if (opcion == (int) opcion) { //comprueba buffer que tiene un entero, para cambiar check a false
+                distinto = false;
+            }
+        } while (opcion < 1 || opcion > 6 || !distinto);
 	}
 	
 	/**
@@ -60,7 +68,7 @@ public class Principal {
 	 * Procedimiento que ejecuta la opción del menú realizada
 	 * @param opcion nro de opción del menú que se realizará
 	 */
-	public static void elegirOpcion(int opcion) {
+	public static void ejecutarOpcion(int opcion) {
 		Alumno alu;		
 		switch(opcion) {
 			case 1: alu = registrar();
@@ -70,7 +78,7 @@ public class Principal {
 						System.out.println("Alumno no se carga. El LU ya existe."); break;
 			case 2: if(alumnos.isEmpty()==false) {						
 						System.out.print("Nro LU a eliminar: ");
-						int lu = ingreso.nextInt();
+						int lu = introNumber.nextInt();
 						if(encontrarLU(lu)==true)
 							borrarAlumno(lu);
 						else
@@ -79,7 +87,7 @@ public class Principal {
 						System.out.println("No hay alumnos registrados."); break;
 			case 3: if(!alumnos.isEmpty()) {
 						System.out.print("Nro LU a modificar: ");
-						int nro = ingreso.nextInt();
+						int nro = introNumber.nextInt();
 						if(encontrarLU(nro))
 							editarNotas(nro);
 						else
@@ -102,22 +110,23 @@ public class Principal {
 	 * Función que registra datos del alumno y crea el objeto Alumno
 	 * @return Devuelve un objeto tipo Alumno
 	 */
-	public static Alumno registrar() {		
+	public static Alumno registrar() {
+		Scanner introTexto = new Scanner(System.in).useDelimiter("\n");
 		double lasNotas[]= new double[5];
 		System.out.println("REGISTRO DE ALUMNOS");
 		System.out.print("Apellido(s): ");
-		String apellidos = ingreso.next();
+		String apellidos = introTexto.next();		
 		System.out.print("Nombre(s): ");
-		String nombres = ingreso.next();
+		String nombres = introTexto.next();
 		System.out.print("Nro. LU: ");
-		int nroLu = ingreso.nextInt();
+		int nroLu = introNumber.nextInt();
 		if(!encontrarLU(nroLu)) {
 			for(int i=0; i<5; i++) {
 				System.out.print("Nota " + (i+1) + ": ");
-				lasNotas[i] = ingreso.nextDouble();
+				lasNotas[i] = introNumber.nextDouble();
 				while(lasNotas[i]<1 || lasNotas[i]>10) {
 					System.out.print("Error. Ingrese entre 1 y 10: ");
-					lasNotas[i] = ingreso.nextDouble();
+					lasNotas[i] = introNumber.nextDouble();
 				}
 			}
 			 return alumno = new Alumno(apellidos, nombres, nroLu, lasNotas);
@@ -177,10 +186,10 @@ public class Principal {
 				System.out.println(unAlumno);				
 				for(int i=0;i<5;i++) {
 					System.out.print("Nota " + (i+1) + ": ");
-					notasNuevas[i] = ingreso.nextDouble();
+					notasNuevas[i] = introNumber.nextDouble();
 					while(notasNuevas[i]<1 || notasNuevas[i]>10) {
 						System.out.print("Error. Ingrese entre 1 y 10: ");
-						notasNuevas[i] = ingreso.nextDouble();
+						notasNuevas[i] = introNumber.nextDouble();
 					}
 				}
 				unAlumno.setNotas(notasNuevas);
