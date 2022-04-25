@@ -15,6 +15,11 @@ public class Principal {
 		mostrarInversoDelArreglo(arreglo);
 	}
 	static void mostrarInversoDelArreglo(int [] numeros){
+
+		for(int i=numeros.length-1;i>-1;i--) {
+			
+			System.out.println(numeros[i]);
 		
+			}
 	}
 }
