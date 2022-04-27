@@ -1,4 +1,4 @@
-package ar.edu.unju.fi.punto8;
+package ar.edu.unju.fi.ejercicio8;
 
 import java.util.ArrayList;
 import java.util.InputMismatchException;
@@ -6,7 +6,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Scanner;
 
-import ar.edu.unju.fi.punto3.Alumno;
+import ar.edu.unju.fi.ejercicio3.Alumno;
 
 /**
  * Clase que permite manipular objetos de tipo Alumno (ABM de objetos Alumno)
