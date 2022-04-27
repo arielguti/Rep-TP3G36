@@ -1,4 +1,4 @@
-package ar.edu.unju.fi.punto3;
+package ar.edu.unju.fi.ejercicio3;
 
 /**
  * Clase del objeto Alumno que contiene datos personales y sus notas
